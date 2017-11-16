@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'members/new'
 
-  root to: 'home#index' 
+  root to: 'stores#index' 
 
   resources :stores
 

@@ -1,11 +1,12 @@
 class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
+  before_action :get_quota, only: [:index, :new, :create]
+  before_action :validate_store , only:[:create]
 
   # GET /stores
   # GET /stores.json
   def index
-    @stores = Store.where(user_id: current_user.id)
-    @quota =  @stores.sum{|u| u.upload.size}
+    #@stores.inject(0){|sum,x| sum + x.upload.size }
   end
 
   # GET /stores/1
@@ -16,7 +17,6 @@ class StoresController < ApplicationController
   # GET /stores/new
   def new
     @store = Store.new
-    @quota =  Store.where(user_id: current_user.id).sum{|u| u.upload.size}
   end
 
   # GET /stores/1/edit
@@ -25,25 +25,18 @@ class StoresController < ApplicationController
 
   # POST /stores
   # POST /stores.json
-  def create
-    @current_quota = Store.where(user_id: current_user.id).sum{|u| u.upload.size}
- 
-    if @current_quota +  params[:store][:upload].size < current_user.membership.totalQuota
-      @store = current_user.stores.build(store_params)
-      respond_to do |format|
-        if @store.save
-          format.html { redirect_to @store, notice: 'Store was successfully created.' }
-          format.json { render :show, status: :created, location: @store }
-        else
-          format.html { render :new }
-          format.json { render json: @store.errors, status: :unprocessable_entity }
-        end
+  def create   
+    @store = current_user.stores.build(store_params)
+    respond_to do |format|
+      if @store.save
+        format.html { redirect_to @store, notice: 'Store was successfully created.' }
+        format.json { render :show, status: :created, location: @store }
+      else
+        format.html { render :new }
+        format.json { render json: @store.errors, status: :unprocessable_entity }
       end
-    else
-      redirect_to stores_path
-      flash[:error] = "Limit Reached!!! cannot upload more files"
-    end  
-end
+    end
+  end
 
 
 
@@ -81,5 +74,17 @@ end
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
       params.require(:store).permit(:upload, :folderType)
+    end
+
+    def get_quota
+      @stores = current_user.stores
+      @quota =  @stores.sum{|u| u.upload.size}
+    end  
+
+    def validate_store
+      if @quota +  params[:store][:upload].size > current_user.membership.totalQuota
+        redirect_to stores_path
+        flash[:error] = "Limit Reached!!! cannot upload more files" 
+      end
     end
 end

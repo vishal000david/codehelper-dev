@@ -7,5 +7,4 @@ class Store < ApplicationRecord
 
 	validates_presence_of :folderType
 
-
 end
