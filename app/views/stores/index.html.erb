@@ -15,7 +15,8 @@
   <tbody>
     <% @stores.each do |store| %>
       <tr>
-        <td><%=  File.basename(store.upload.path) %> </td>
+        <td><%=  File.basename(store.upload.path) %>
+         </td>
         <td><%= store.upload.size %></td>
         <td><%= store.folderType %></td>
         <td><a href="<%= store.upload %>" download> download </a></td>
