@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Stores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Size</th>
+      <th>Uploaded to</th>
+      <th> Actions</th>
+    </tr>
+  </thead>
+ You are currently using <%= @quota %> bytes
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%=  File.basename(store.upload.path) %> </td>
+        <td><%= store.upload.size %></td>
+        <td><%= store.folderType %></td>
+        <td><a href="<%= store.upload %>" download> download </a></td>
+        <td><%= link_to 'Show', store %></td>
+        <td><%= link_to 'Edit', edit_store_path(store) %></td>
+        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Upload New File', new_store_path %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  upload: MyString
+  folderType: MyString
+
+two:
+  upload: MyString
+  folderType: MyString

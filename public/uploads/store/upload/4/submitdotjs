@@ -1,0 +1,57 @@
+
+$("#reg_form").submit(function( event ) {
+  event.preventDefault();
+  let email     = $("#email").val();
+  let firstname = $("#firstname").val();
+  let lastname  = $("#lastname").val();
+  let contact     = $("#contact").val();
+  let country     = $("#country").val();
+
+  console.log(email,firstname,lastname,contact,country)
+
+$.ajax({
+      type: 'POST',
+      url: "https://jsonplaceholder.typicode.com/posts",
+      data: country,
+      dataType: 'json',
+      success: function(res) 
+      { 
+      	console.log(res) 
+      	$("#myModal").modal('show');
+
+      },
+      error: function(){
+        alert('failure');
+    }
+
+});
+
+
+$("#otp-send").on('click',function() {
+	console.log("Asdasddsa");
+
+			$.ajax({
+		      type: 'GET',
+		      url: "https://jsonplaceholder.typicode.com/users",
+		      data: country,
+		      dataType: 'json',
+		      success: function(res) 
+		      { 
+		      	alert("users fetch Complete")
+		      	console.log(res)
+		      },
+		      error: function(){
+		        alert('failure');
+		    }
+
+		});
+
+
+
+})
+
+
+
+});
+
+
