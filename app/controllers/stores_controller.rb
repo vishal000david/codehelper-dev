@@ -5,11 +5,7 @@ class StoresController < ApplicationController
   # GET /stores.json
   def index
     @stores = Store.where(user_id: current_user.id)
-
-    @quota = 0
-    @stores.each do |store|
-      @quota = @quota +  store.upload.size
-    end
+    @quota =  @stores.sum{|u| u.upload.size}
   end
 
   # GET /stores/1
@@ -20,26 +16,37 @@ class StoresController < ApplicationController
   # GET /stores/new
   def new
     @store = Store.new
+    @quota =  Store.where(user_id: current_user.id).sum{|u| u.upload.size}
   end
 
   # GET /stores/1/edit
-  def edit
+  def edit 
   end
 
   # POST /stores
   # POST /stores.json
   def create
-    @store = current_user.stores.build(store_params)
-    respond_to do |format|
-      if @store.save
-        format.html { redirect_to @store, notice: 'Store was successfully created.' }
-        format.json { render :show, status: :created, location: @store }
-      else
-        format.html { render :new }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+    @current_quota = Store.where(user_id: current_user.id).sum{|u| u.upload.size}
+ 
+    if @current_quota +  params[:store][:upload].size < 10000
+      @store = current_user.stores.build(store_params)
+      respond_to do |format|
+        if @store.save
+          format.html { redirect_to @store, notice: 'Store was successfully created.' }
+          format.json { render :show, status: :created, location: @store }
+        else
+          format.html { render :new }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
       end
-    end
-  end
+    else
+      redirect_to stores_path
+      flash[:error] = "Limit Reached!!! cannot upload more files"
+    end  
+end
+
+
+
 
   # PATCH/PUT /stores/1
   # PATCH/PUT /stores/1.json

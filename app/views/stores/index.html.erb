@@ -12,12 +12,17 @@
     </tr>
   </thead>
  You are currently using <%= @quota %> bytes
+
+ <br>
+You are left with  <%= 10000 - @quota %> bytes
+
+
   <tbody>
     <% @stores.each do |store| %>
       <tr>
         <td><%=  File.basename(store.upload.path) %>
          </td>
-        <td><%= store.upload.size %></td>
+        <td><%= store.upload.size %> bytes</td>
         <td><%= store.folderType %></td>
         <td><a href="<%= store.upload %>" download> download </a></td>
         <td><%= link_to 'Show', store %></td>
