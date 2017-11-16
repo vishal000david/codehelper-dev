@@ -10,7 +10,7 @@ class User < ApplicationRecord
    after_create :create_member
 
    def create_member 
-    @member_params = {memberType: "Prime" ,totalQuota: 200000000}
+    @member_params = {memberType: "Normal" ,totalQuota: 10000}
     @membership = self.build_membership(@member_params)
     @membership.save
    end

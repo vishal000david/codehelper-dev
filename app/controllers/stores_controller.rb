@@ -28,7 +28,7 @@ class StoresController < ApplicationController
   def create
     @current_quota = Store.where(user_id: current_user.id).sum{|u| u.upload.size}
  
-    if @current_quota +  params[:store][:upload].size < 10000
+    if @current_quota +  params[:store][:upload].size < current_user.membership.totalQuota
       @store = current_user.stores.build(store_params)
       respond_to do |format|
         if @store.save

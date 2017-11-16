@@ -1,6 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Stores</h1>
+<i>You are currently using <%= @quota %> bytes
+
+ <br>
+You are left with  <%= current_user.membership.totalQuota - @quota %> bytes
+</i>
+<hr />
+
+
+
+<h1>All files</h1>
 
 <table>
   <thead>
@@ -11,11 +20,6 @@
       <th> Actions</th>
     </tr>
   </thead>
- You are currently using <%= @quota %> bytes
-
- <br>
-You are left with  <%= 10000 - @quota %> bytes
-
 
   <tbody>
     <% @stores.each do |store| %>
@@ -34,5 +38,6 @@ You are left with  <%= 10000 - @quota %> bytes
 </table>
 
 <br>
+<hr />
 
 <%= link_to 'Upload New File', new_store_path %>

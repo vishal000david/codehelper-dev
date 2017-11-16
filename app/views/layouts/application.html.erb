@@ -11,10 +11,18 @@
   <body>
 
   <% if user_signed_in? %>
-   <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
+  <b>
+   <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+   <hr />        
     <br />
    Current User -  <%= current_user.name %>
-  <% end %>
+
+     <br />
+
+     You are a  <%=current_user.membership.memberType %>  member 
+    <% end %>
+    <hr />
+    </b>
 
   <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
