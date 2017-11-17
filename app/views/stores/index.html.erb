@@ -11,33 +11,13 @@ You are left with  <%= current_user.membership.totalQuota - @quota %> bytes
 
 <h1>All files</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>File</th>
-      <th>Size</th>
-      <th>Uploaded to</th>
-      <th> Actions</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @stores.each do |store| %>
-      <tr>
-        <td><%=  File.basename(store.upload.path) %>
-         </td>
-        <td><%= store.upload.size %> bytes</td>
-        <td><%= store.folderType %></td>
-        <td><a href="<%= store.upload %>" download> download </a></td>
-        <td><%= link_to 'Show', store %></td>
-        <td><%= link_to 'Edit', edit_store_path(store) %></td>
-        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= link_to 'Folder1', select_folder_path(:type => "Folder1") %>
+<%= link_to 'Folder2', select_folder_path(:type => "Folder2") %>
+<%= link_to 'Folder3', select_folder_path(:type => "Folder3") %>
+<%= link_to 'Folder4', select_folder_path(:type => "Folder4") %>
 
-<br>
-<hr />
+
 
 <%= link_to 'Upload New File', new_store_path %>
+

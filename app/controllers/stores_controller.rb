@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
-  before_action :get_quota, only: [:index, :new, :create]
+  before_action :get_quota, only: [:index, :new, :create,:select_folder]
   before_action :validate_store , only:[:create]
 
   # GET /stores
@@ -63,6 +63,13 @@ class StoresController < ApplicationController
       format.html { redirect_to stores_url, notice: 'Store was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def select_folder
+    @store_list = @stores.where(folderType: params[:type])
+   render :template => "partials/folder"
+
   end
 
   private

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   root to: 'stores#index' 
 
+  get 'select_folder' => "stores#select_folder"
+
   resources :stores
 
   devise_for :users, :controllers => { registrations: 'registrations' }
