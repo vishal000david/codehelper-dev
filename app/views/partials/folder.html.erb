@@ -20,13 +20,69 @@
 
         <th>
         <td><a href="<%= store.upload %>" download> download </a></td>
+        <td data-toggle="modal" data-target="#myModal">Share File</td>
+
         <td><%= link_to 'Show', store %></td>
         <td><%= link_to 'Edit', edit_store_path(store) %></td>
         <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </th>
+
+
       </tr>
     <% end %>
   </tbody>
-     
-     
-    </table>
+</table>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+           <h4 class="modal-title">Share File with other user</h4>
+         </div>
+        
+        <div class="modal-body"> 
+          Select User
+				  <%= select_tag "city", options_for_select([@user_names],:class=>"btn") %>
+
+				  
+        </div>
+        <table class="table table-hover table-striped">
+      
+      <thead>
+        <tr class="sortable">
+          <th>File</th>
+      <th>Size</th>
+      <th>Uploaded to</th>
+       
+       <th class="text-center"> <td> Actions </td></th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+      <tr>
+        <td> download </a></td>
+
+
+      </tr>
+  </tbody>
+</table>
+
+
+
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
+
+

@@ -67,6 +67,10 @@ class StoresController < ApplicationController
 
 
   def select_folder
+    @users = User.where.not(id: current_user.id)
+    @user_names = @users.collect{|x| x.name}
+    @user_ids = @users.collect{|x| x.id}
+
     @store_list = @stores.where(folderType: params[:type])
    render :template => "partials/folder"
   end
@@ -84,8 +88,6 @@ class StoresController < ApplicationController
 
     def get_quota
       # Share.where(:reciever_id => current_user.id).collect{|x| x.store_id}
-
-
       # @stores = current_user.stores
       @store_ids = Share.where(:reciever_id => current_user.id).collect{|x| x.store_id}
       @stores = Store.where(id: @store_ids) 
