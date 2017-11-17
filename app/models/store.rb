@@ -3,8 +3,8 @@ class Store < ApplicationRecord
 
 	mount_uploader :upload, FileUploader
 
-	validates_presence_of :upload
+	validates_presence_of :upload ,:on => :create
 
-	validates_presence_of :folderType
+	validates_presence_of :folderType, :on => :create
 
 end
