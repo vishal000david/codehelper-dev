@@ -1,31 +1,32 @@
-<table>
-  <thead>
-    <tr>
-      <th>File</th>
+<table class="table table-hover table-striped">
+      <thead>
+        <tr class="sortable">
+          <th>File</th>
       <th>Size</th>
       <th>Uploaded to</th>
-      <th> Actions</th>
-    </tr>
-  </thead>
+       
+       <th class="text-center"> <td> Actions </td></th>
 
-  <tbody>
+        </tr>
+        </thead>
+
+        <tbody>
     <% @store_list.each do |store| %>
       <tr>
         <td><%=  File.basename(store.upload.path) %>
          </td>
         <td><%= store.upload.size %> bytes</td>
         <td><%= store.folderType %></td>
+
+        <th>
         <td><a href="<%= store.upload %>" download> download </a></td>
         <td><%= link_to 'Show', store %></td>
         <td><%= link_to 'Edit', edit_store_path(store) %></td>
         <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </th>
       </tr>
     <% end %>
   </tbody>
-</table>
-
-<br>
-<hr />
-
-
-<%= link_to 'Back Home' , stores_path %>
+     
+     
+    </table>

@@ -7,4 +7,15 @@ class Store < ApplicationRecord
 
 	validates_presence_of :folderType, :on => :create
 
+	has_many :shares
+
+	after_create :create_share_record
+
+	def create_share_record
+		@share_params = {:reciever_id => self.user_id,:user_id => self.user_id,:permission => "R-W-X"}
+		share_rec =  self.shares.build(@share_params)
+		share_rec.save
+
+	end
+
 end

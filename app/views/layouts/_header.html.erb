@@ -1,0 +1,65 @@
+<% if user_signed_in? %>
+<div class="container">
+
+<div class="row">
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">File Manager</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to('LOGOUT', destroy_user_session_path, method: :delete) %></li>
+    </ul>
+  </div>
+</nav>
+</div>
+
+
+<div class="row">
+
+  
+  <div class="col-sm-6">
+  <%= link_to  new_store_path , :class => "btn btn-default" do %>
+   <span class="glyphicon glyphicon-upload"></span> Download </a>
+   <% end %>
+
+   <%= link_to  new_store_path , :class => "btn btn-default" do %>
+   <span class="glyphicon glyphicon-upload"></span> Delete </a>
+   <% end %>
+  
+  
+  </div>
+
+
+
+<div class="pull-right col-sm-offset-2">
+  <div class="col-sm-5">
+  <%= link_to  new_store_path , :class => "btn btn-default" do %>
+   <span class="glyphicon glyphicon-upload"></span> Upload </a>
+   <% end %>
+  </div>
+
+  <div class="col-sm-2">
+    <%= link_to  new_store_path , :class => "btn btn-default" do %>
+     <span class="glyphicon glyphicon-upload"></span> New Folder </a>
+     <% end %>
+  </div>
+  </div>
+ 
+
+</div>
+
+ <div class="row">
+  <ol class="breadcrumb">
+      <span class="glyphicon glyphicon-home"></span>
+      <!-- ngRepeat: p in FM.curBreadCrumbPaths --><li ng-repeat="p in FM.curBreadCrumbPaths" class="ng-scope"><%= link_to 'Home', stores_path %>
+     </li><!-- end ngRepeat: p in FM.curBreadCrumbPaths -->
+    </ol>
+  </div>
+
+  <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+  <% end %>
+
+  </div>

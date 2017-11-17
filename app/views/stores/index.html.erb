@@ -1,23 +1,71 @@
 <p id="notice"><%= notice %></p>
 
-<i>You are currently using <%= @quota %> bytes
-
- <br>
-You are left with  <%= current_user.membership.totalQuota - @quota %> bytes
-</i>
-<hr />
-
-
-
 <h1>All files</h1>
 
 
-<%= link_to 'Folder1', select_folder_path(:type => "Folder1") %>
-<%= link_to 'Folder2', select_folder_path(:type => "Folder2") %>
-<%= link_to 'Folder3', select_folder_path(:type => "Folder3") %>
-<%= link_to 'Folder4', select_folder_path(:type => "Folder4") %>
+<table class="table table-hover table-striped">
+      <thead>
+        <tr class="sortable">
+          <th><input type="checkbox" value="" ng-model="FM.selectAll"></th>
+          <th>Type</th>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr class="sortable" ng-repeat="file in FM.curFiles | orderBy:'folder'">
+        <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
+        <td> Folder </td>
+        <td >
+        <%= link_to 'Folder1', select_folder_path(:type => "Folder1") %>
+        </td>
+        <td>as</td>
+        <td>as</td>
+      </tr>
+      
+
+            <tr class="sortable" ng-repeat="file in FM.curFiles | orderBy:'folder'">
+        <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
+        <td> Folder </td>
+        <td >
+        <%= link_to 'Folder2', select_folder_path(:type => "Folder2") %>
+        </td>
+        <td>as</td>
+        <td>as</td>
+      </tr>
+
+            <tr class="sortable" ng-repeat="file in FM.curFiles | orderBy:'folder'">
+        <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
+        <td> Folder </td>
+
+        <td >
+        <%= link_to 'Folder3', select_folder_path(:type => "Folder3") %>
+        	
+        </td>
+        <td>as</td>
+        <td>as</td>
+      </tr>
+            <tr class="sortable" ng-repeat="file in FM.curFiles | orderBy:'folder'">
+        <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
+        <td> Folder </td>
+        <td >
+        <%= link_to 'Folder4', select_folder_path(:type => "Folder4") %>
+        	
+        </td>
+        <td>as</td>
+        <td>as</td>
+      </tr>
+
+
+        
+      </tr>
+      
+
+      </tbody>
+    </table>
+    
 
 
 
-<%= link_to 'Upload New File', new_store_path %>
 

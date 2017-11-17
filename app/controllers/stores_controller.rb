@@ -69,7 +69,6 @@ class StoresController < ApplicationController
   def select_folder
     @store_list = @stores.where(folderType: params[:type])
    render :template => "partials/folder"
-
   end
 
   private
@@ -84,7 +83,12 @@ class StoresController < ApplicationController
     end
 
     def get_quota
-      @stores = current_user.stores
+      # Share.where(:reciever_id => current_user.id).collect{|x| x.store_id}
+
+
+      # @stores = current_user.stores
+      @store_ids = Share.where(:reciever_id => current_user.id).collect{|x| x.store_id}
+      @stores = Store.where(id: @store_ids) 
       @quota =  @stores.sum{|u| u.upload.size}
     end  
 
