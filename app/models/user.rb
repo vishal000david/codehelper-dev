@@ -13,6 +13,6 @@ class User < ApplicationRecord
     @member_params = {memberType: "Normal" ,totalQuota: 10000}
     @membership = self.build_membership(@member_params)
     @membership.save
-   end
+    end
 
 end

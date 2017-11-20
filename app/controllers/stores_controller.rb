@@ -38,9 +38,6 @@ class StoresController < ApplicationController
     end
   end
 
-
-
-
   # PATCH/PUT /stores/1
   # PATCH/PUT /stores/1.json
   def update
@@ -67,13 +64,23 @@ class StoresController < ApplicationController
 
 
   def select_folder
+    @share = Share.new
+    @except_current = User.where.not(:id => current_user.id) 
     @users = User.where.not(id: current_user.id)
-    @user_names = @users.collect{|x| x.name}
-    @user_ids = @users.collect{|x| x.id}
-
     @store_list = @stores.where(folderType: params[:type])
    render :template => "partials/folder"
   end
+
+   def give_perm
+
+    @share = Share.new
+    #  params[:share][:reciever_id]
+    #  params[:share][:permission]
+
+
+
+   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

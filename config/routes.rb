@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'members/new'
 
+  post '/give_perm' => 'stores#give_perm'
+
   root to: 'stores#index' 
 
   get 'select_folder' => "stores#select_folder"
