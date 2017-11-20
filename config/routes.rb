@@ -13,6 +13,11 @@ Rails.application.routes.draw do
 
   get 'select_folder' => "stores#select_folder"
 
+
+  get 'open_share_modal' => "stores#open_share_modal"
+
+
+
   resources :stores
 
   devise_for :users, :controllers => { registrations: 'registrations' }

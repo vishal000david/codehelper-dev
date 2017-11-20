@@ -1,0 +1,53 @@
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+           <h4 class="modal-title">Share File with other user</h4>
+         </div>
+
+        <div class="modal-body"> 
+
+        <% if @share != nil%>
+        <%= form_for @share ,:url => give_perm_path do |f| %>
+ 					 
+ 					<% if @except_current != nil %>
+ 					 <div class="form-group">
+            Share with:
+            <%=f.collection_select :reciever_id,@except_current, :id, :name %>
+            </div>
+            <% end %>
+
+
+            <div class="form-group">
+            <label class="control-lablel"> label</label>
+             Read <input type="checkbox" name="share[permission][]" value="R">
+             Write <input type="checkbox" name="share[permission][]" value="W">
+             Execute <input type="checkbox" name="share[permission][]" value="X">
+             </div>
+
+             <% if @current_store_id != nil %>
+              <%= f.hidden_field :store_id, :value => @current_store_id %>
+             <% end %>
+
+              
+
+
+            <%= f.submit "Give Permission"%>
+          <% end %>
+          <% end %>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
+
+

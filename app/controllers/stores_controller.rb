@@ -64,20 +64,33 @@ class StoresController < ApplicationController
 
 
   def select_folder
-    @share = Share.new
-    @except_current = User.where.not(:id => current_user.id) 
-    @users = User.where.not(id: current_user.id)
     @store_list = @stores.where(folderType: params[:type])
    render :template => "partials/folder"
   end
 
    def give_perm
-
     @share = Share.new
+    @share.reciever_id =params[:share][:reciever_id].to_i
+    @share.user_id = current_user.id.to_i
+    @share.permission = params[:share][:permission]
+    @share.store_id = params[:share][:store_id].to_i
+     
+     if @share.save
+      flash[:notice] ="Permission granted"
+     else
+      flash[:error] = "Some error occured"
+     end
     #  params[:share][:reciever_id]
     #  params[:share][:permission]
+   end
 
-
+   def open_share_modal
+     @share = Share.new
+     @except_current = User.where.not(:id => current_user.id) 
+     @current_store_id = params[:store_id].to_i
+     respond_to do |format|
+      format.js
+    end
 
    end
 
