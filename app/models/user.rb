@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
    has_many :stores
    has_one  :membership
+   has_many :folders
 
    after_create :create_member
 

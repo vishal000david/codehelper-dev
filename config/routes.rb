@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  resources :folders
   get 'members/index'
 
   get 'members/create'

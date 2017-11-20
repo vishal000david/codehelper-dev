@@ -1,0 +1,30 @@
+<%= form_with(model: folder, local: true) do |form| %>
+  <% if folder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+      <% folder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+  <label> Make new Fodler inside</label>
+
+      <%= form.select :folderParent, [ 'Folder1','Folder2','Folder3','Folder4' ] %>
+    </div>
+
+
+  <div class="field">
+    <%= form.label :folderName %>
+    <%= form.text_field :folderName, id: :folder_folderName %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

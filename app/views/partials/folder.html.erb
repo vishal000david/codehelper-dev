@@ -1,6 +1,7 @@
 <table class="table table-hover table-striped">
       <thead>
         <tr class="sortable">
+      <th> type </th>
       <th>File</th>
       <th>Size</th>
       <th>Uploaded to</th>
@@ -12,8 +13,24 @@
         </thead>
 
         <tbody>
+
+  <% current_user.folders.each do |fold| %>
+    <tr>
+      <td> Folder </td>
+      <td><%= fold.folderParent %></td>
+      <td><%= fold.folderName %></td>
+       <td><%= link_to 'Edit', edit_folder_path(fold) %></td>
+        <td><%= link_to 'Destroy', fold, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+
+  <% end %>     
+      
+
+
+
     <% @user_shares.each do |share| %>
       <tr>
+        <td> File </td>
         <td><%=  File.basename(share.store.upload.path) %>
          </td>
         <td><%= share.store.upload.size %> bytes</td>
@@ -28,7 +45,7 @@
           <a href="<%= share.store.upload %>" download> download </a>
          </td>
          <td>
-         
+
         <%= link_to "Share File", open_share_modal_path(store_id: share.store.id), remote: true %>
         </td>
       
