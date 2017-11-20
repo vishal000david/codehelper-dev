@@ -64,7 +64,8 @@ class StoresController < ApplicationController
 
 
   def select_folder
-    @store_list = @stores.where(folderType: params[:type])
+    # @store_list = @stores.where(folderType: params[:type])
+    @user_shares = Share.where(:reciever_id => current_user.id)
    render :template => "partials/folder"
   end
 
@@ -76,8 +77,10 @@ class StoresController < ApplicationController
     @share.store_id = params[:share][:store_id].to_i
      
      if @share.save
+      redirect_to stores_path
       flash[:notice] ="Permission granted"
      else
+      redirect_to stores_path
       flash[:error] = "Some error occured"
      end
     #  params[:share][:reciever_id]

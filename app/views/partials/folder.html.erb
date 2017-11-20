@@ -11,27 +11,26 @@
         </thead>
 
         <tbody>
-    <% @store_list.each do |store| %>
+    <% @user_shares.each do |share| %>
       <tr>
-        <td><%=  File.basename(store.upload.path) %>
+        <td><%=  File.basename(share.store.upload.path) %>
          </td>
-        <td><%= store.upload.size %> bytes</td>
-        <td><%= store.folderType %></td>
+        <td><%= share.store.upload.size %> bytes</td>
+        <td><%= share.store.folderType %></td>
 
         <th>
-        <td><a href="<%= store.upload %>" download> download </a></td>
+        <td><a href="<%= share.store.upload %>" download> download </a></td>
         
 
         <td>
-        <%= link_to "Share File", open_share_modal_path(store_id: store.id), remote: true %>
+        <%= link_to "Share File", open_share_modal_path(store_id: share.store.id), remote: true %>
         </td>
 
 
-        <td><%= link_to 'Show', store %></td>
-        <td><%= link_to 'Edit', edit_store_path(store) %></td>
-        <td><%= link_to 'Destroy', store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', share.store %></td>
+        <td><%= link_to 'Edit', edit_store_path(share.store) %></td>
+        <td><%= link_to 'Destroy', share.store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </th>
-
 
       </tr>
     <% end %>

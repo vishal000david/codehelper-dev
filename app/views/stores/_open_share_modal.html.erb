@@ -1,6 +1,11 @@
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
+   <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+
     <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
@@ -22,7 +27,7 @@
 
 
             <div class="form-group">
-            <label class="control-lablel"> label</label>
+            <label class="control-lablel"> Permissions</label>
              Read <input type="checkbox" name="share[permission][]" value="R">
              Write <input type="checkbox" name="share[permission][]" value="W">
              Execute <input type="checkbox" name="share[permission][]" value="X">
