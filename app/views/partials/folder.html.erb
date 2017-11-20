@@ -1,9 +1,10 @@
 <table class="table table-hover table-striped">
       <thead>
         <tr class="sortable">
-          <th>File</th>
+      <th>File</th>
       <th>Size</th>
       <th>Uploaded to</th>
+      <th>Permissions</th>
        
        <th class="text-center"> <td> Actions </td></th>
 
@@ -17,20 +18,38 @@
          </td>
         <td><%= share.store.upload.size %> bytes</td>
         <td><%= share.store.folderType %></td>
+        <td><%= share.permission %></td>
+
 
         <th>
-        <td><a href="<%= share.store.upload %>" download> download </a></td>
-        
-
-        <td>
+      
+       <% if share.permission.include? "X" %>
+         <td>
+          <a href="<%= share.store.upload %>" download> download </a>
+         </td>
+         <td>
+         
         <%= link_to "Share File", open_share_modal_path(store_id: share.store.id), remote: true %>
         </td>
+      
+        <% end %>
 
+        
 
-        <td><%= link_to 'Show', share.store %></td>
-        <td><%= link_to 'Edit', edit_store_path(share.store) %></td>
+        <% if share.permission.include? "R" or share.permission.include? "W"  or share.permission.include? "X"%>
+          <td><%= link_to 'Show', share.store %></td>
+        <% end %>
+        
+        <% if share.permission.include? "W" %>
+           <td><%= link_to 'Edit', edit_store_path(share.store) %></td>
+        <% end %>
+        
+       <% if share.permission.include? "L" %>
         <td><%= link_to 'Destroy', share.store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+
         </th>
+
 
       </tr>
     <% end %>
