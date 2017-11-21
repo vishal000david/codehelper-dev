@@ -2,7 +2,7 @@
       <thead>
         <tr class="sortable">
       <th> type </th>
-      <th>File</th>
+      <th>FileName</th>
       <th>Size</th>
       <th>Uploaded to</th>
       <th>Permissions</th>
@@ -17,8 +17,14 @@
   <% current_user.folders.each do |fold| %>
     <tr>
       <td> Folder </td>
-      <td><%= fold.folderParent %></td>
-      <td><%= fold.folderName %></td>
+      <td>
+
+      <%= link_to fold.folderName , subfolder_path(fold: fold) %>
+        
+      </td>
+      <td> - </td>
+      <td> - </td>
+      <td> - </td>
        <td><%= link_to 'Edit', edit_folder_path(fold) %></td>
         <td><%= link_to 'Destroy', fold, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>

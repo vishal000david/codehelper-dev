@@ -14,8 +14,9 @@ Rails.application.routes.draw do
 
   get 'select_folder' => "stores#select_folder"
 
-
   get 'open_share_modal' => "stores#open_share_modal"
+
+  get 'subfolder' => "folders#subfolder"
 
 
 

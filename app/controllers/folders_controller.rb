@@ -60,6 +60,10 @@ class FoldersController < ApplicationController
     end
   end
 
+  def subfolder
+    @folder     = Folder.where(id:  params[:fold])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_folder
@@ -68,6 +72,7 @@ class FoldersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
-      params.require(:folder).permit(:folderParent, :folderName)
+      binding.pry
+      params.require(:folder).permit(:folderName)
     end
 end

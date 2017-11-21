@@ -1,19 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Folderparent:</strong>
+  <strong>Folder created inside</strong> :
   <%= @folder.folderParent %>
 </p>
 
 <p>
-  <strong>Foldername:</strong>
+  <strong>New Folder Name</strong> :
   <%= @folder.folderName %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @folder.user %>
-</p>
 
-<%= link_to 'Edit', edit_folder_path(@folder) %> |
-<%= link_to 'Back', folders_path %>
+<%= link_to 'Edit', edit_folder_path(@folder) %> 

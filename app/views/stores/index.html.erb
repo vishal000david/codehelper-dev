@@ -18,7 +18,7 @@
         <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
         <td> Folder </td>
         <td >
-        <%= link_to 'Folder1', select_folder_path(:type => "Folder1") %>
+        <%= link_to 'Builder', select_folder_path(:type => "Builder") %>
         </td>
         <td></td>
         <td></td>
@@ -29,18 +29,18 @@
         <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
         <td> Folder </td>
         <td >
-        <%= link_to 'Folder2', select_folder_path(:type => "Folder2") %>
+         <%= link_to 'File Manager',                             select_folder_path(:type => "FileManager") %>
         </td>
         <td></td>
         <td></td>
       </tr>
 
-            <tr class="sortable" ng-repeat="file in FM.curFiles | orderBy:'folder'">
+        <tr class="sortable" ng-repeat="file in FM.curFiles | orderBy:'folder'">
         <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
         <td> Folder </td>
 
         <td >
-        <%= link_to 'Folder3', select_folder_path(:type => "Folder3") %>
+        <%= link_to 'IDE', select_folder_path(:type => "IDE") %>
         	
         </td>
         <td></td>
@@ -50,7 +50,7 @@
         <td><input type="checkbox" value="{{file.name}}" ng-model="file.selected"></td>
         <td> Folder </td>
         <td >
-        <%= link_to 'Folder4', select_folder_path(:type => "Folder4") %>
+        <%= link_to 'SnippetManager', select_folder_path(:type => "SnippetManager") %>
         	
         </td>
         <td></td>
