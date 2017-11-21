@@ -7,6 +7,7 @@ class StoresController < ApplicationController
   # GET /stores.json
   def index
     #@stores.inject(0){|sum,x| sum + x.upload.size }
+    @folder = Folder.new
   end
 
   # GET /stores/1

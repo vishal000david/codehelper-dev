@@ -27,8 +27,8 @@ class FoldersController < ApplicationController
     @folder = current_user.folders.build(folder_params)
     respond_to do |format|
       if @folder.save
-        format.html { redirect_to @folder, notice: 'Folder was successfully created.' }
-        format.json { render :show, status: :created, location: @folder }
+        format.html { redirect_to stores_path, notice: 'Folder was successfully created.' }
+        format.json { render :show, status: :created, location: stores_path }
       else
         format.html { render :new }
         format.json { render json: @folder.errors, status: :unprocessable_entity }
@@ -41,8 +41,8 @@ class FoldersController < ApplicationController
   def update
     respond_to do |format|
       if @folder.update(folder_params)
-        format.html { redirect_to @folder, notice: 'Folder was successfully updated.' }
-        format.json { render :show, status: :ok, location: @folder }
+        format.html { redirect_to stores_path, notice: 'Folder was successfully updated.' }
+        format.json { render :show, status: :ok, location: stores_path }
       else
         format.html { render :edit }
         format.json { render json: @folder.errors, status: :unprocessable_entity }
@@ -72,7 +72,6 @@ class FoldersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
-      binding.pry
       params.require(:folder).permit(:folderName)
     end
 end

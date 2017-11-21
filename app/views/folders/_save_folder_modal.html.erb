@@ -1,0 +1,44 @@
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="saveFolder" role="dialog">
+   <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+
+    <div class="modal-dialog">
+       <div class="modal-content">
+         <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal">&times;</button>
+           <h4 class="modal-title">Create New Folder</h4>
+         </div>
+
+        <div class="modal-body"> 
+
+      <%= form_for @folder ,:url => folders_path , method: :post do |form| %>
+
+        
+        <div class="field">
+         <%= form.label :folderName %>
+          <%= form.text_field :folderName, id: :folder_folderName ,:required => true%>
+        </div>
+
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+
+    </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
+
