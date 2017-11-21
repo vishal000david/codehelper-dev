@@ -62,9 +62,10 @@ class FoldersController < ApplicationController
 
   def subfolder
     @folder = Folder.where(id:  params[:fold])
-    foldId = params[:fold].to_i
+    @foldId = params[:fold].to_i
     # @store_inside = Store.where(folder_id: foldId)
-    @shares = Store.where(folder_id: foldId)[0].shares
+    @shares_w = Share.where(reciever_id: current_user.id)
+
     @folder_name = Folder.find(params[:fold]).folderName
   end
 
