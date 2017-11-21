@@ -35,6 +35,7 @@
 
 
     <% @user_shares.each do |share| %>
+    <% if share.store.folder_id == nil  %>
       <tr>
         <td> File </td>
         <td><%=  File.basename(share.store.upload.path) %>
@@ -75,6 +76,7 @@
 
 
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
