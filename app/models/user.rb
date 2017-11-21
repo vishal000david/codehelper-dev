@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-   has_many :stores
-   has_one  :membership
-   has_many :folders
+   has_many :stores, dependent: :destroy
+   has_one  :membership, dependent: :destroy
+   has_many :folders, dependent: :destroy
 
    after_create :create_member
 

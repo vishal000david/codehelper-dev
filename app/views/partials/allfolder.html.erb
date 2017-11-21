@@ -15,10 +15,10 @@
         <tbody>
 
   <% current_user.folders.each do |fold| %>
+  <% if @type == "FileManager" %>
     <tr>
       <td> Folder </td>
       <td>
-
       <%= link_to fold.folderName , subfolder_path(fold: fold) %>
         
       </td>
@@ -28,7 +28,7 @@
        <td><%= link_to 'Edit', edit_folder_path(fold) %></td>
         <td><%= link_to 'Destroy', fold, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
-
+  <% end %>
   <% end %>     
       
 
@@ -67,7 +67,7 @@
            <td><%= link_to 'Edit', edit_store_path(share.store) %></td>
         <% end %>
         
-       <% if share.permission.include? "L" %>
+       <% if share.permission.include? "R" and share.permission.include? "W" and share.permission.include? "X" %>
         <td><%= link_to 'Destroy', share.store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
 

@@ -1,13 +1,16 @@
 class Store < ApplicationRecord
 	belongs_to :user
 
+	belongs_to :folder, optional: true
+
+
 	mount_uploader :upload, FileUploader
 
 	validates_presence_of :upload ,:on => :create
 
 	validates_presence_of :folderType, :on => :create
 
-	has_many :shares
+	has_many :shares, dependent: :destroy
 
 	after_create :create_share_record
 

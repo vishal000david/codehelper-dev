@@ -55,13 +55,17 @@ class FoldersController < ApplicationController
   def destroy
     @folder.destroy
     respond_to do |format|
-      format.html { redirect_to folders_url, notice: 'Folder was successfully destroyed.' }
+      format.html { redirect_to stores_path, notice: 'Folder was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   def subfolder
-    @folder     = Folder.where(id:  params[:fold])
+    @folder = Folder.where(id:  params[:fold])
+    foldId = params[:fold].to_i
+    # @store_inside = Store.where(folder_id: foldId)
+    @shares = Store.where(folder_id: foldId)[0].shares
+    @folder_name = Folder.find(params[:fold]).folderName
   end
 
   private

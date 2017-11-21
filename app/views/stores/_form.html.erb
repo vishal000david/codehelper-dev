@@ -18,10 +18,21 @@
   </div>
 
 
-  <div class="field">
-  <label> Upload To</label> 
-      <%= form.select :folderType, [ 'Builder','FileManager','IDE','SnippetManager' ] %>
-    </div>
+    <% if @parent == "FileManager" %>
+      <%= form.hidden_field :folderType, :value => 'FileManager'%>
+     <% else %>
+     <div class="field">
+     <label> Upload To</label> 
+       <%= form.select :folderType, [ 'Builder','FileManager','IDE','SnippetManager' ] %>
+      </div>
+     <% end %>
+
+
+    <% if @parent == "FileManager" %>
+     <%= form.hidden_field :folder_id, :value => @folderId%>
+     <% end %>
+
+
 
   <div class="actions">
     <%= form.submit %>

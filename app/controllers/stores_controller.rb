@@ -1,3 +1,4 @@
+
 class StoresController < ApplicationController
   before_action :set_store, only: [:show, :edit, :update, :destroy]
   before_action :get_quota, only: [:index, :new, :create,:select_folder]
@@ -17,6 +18,8 @@ class StoresController < ApplicationController
 
   # GET /stores/new
   def new
+    @parent =  params[:parent]
+    @folderId = params[:folderId]
     @store = Store.new
   end
 
@@ -26,13 +29,14 @@ class StoresController < ApplicationController
 
   # POST /stores
   # POST /stores.json
-  def create   
+  def create  
     @store = current_user.stores.build(store_params)
     respond_to do |format|
       if @store.save
         format.html { redirect_to @store, notice: 'Store was successfully created.' }
         format.json { render :show, status: :created, location: @store }
       else
+        @parent = "FileManager" 
         format.html { render :new }
         format.json { render json: @store.errors, status: :unprocessable_entity }
       end
@@ -66,8 +70,9 @@ class StoresController < ApplicationController
 
   def select_folder
     # @store_list = @stores.where(folderType: params[:type])
+    @type =  params[:type]
     @user_shares = Share.where(:reciever_id => current_user.id)
-   render :template => "partials/folder"
+   render :template => "partials/allfolder"
   end
 
    def give_perm
@@ -107,7 +112,7 @@ class StoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_params
-      params.require(:store).permit(:upload, :folderType)
+      params.require(:store).permit(:upload, :folderType,:folder_id)
     end
 
     def get_quota
@@ -119,9 +124,13 @@ class StoresController < ApplicationController
     end  
 
     def validate_store
-      if @quota +  params[:store][:upload].size > current_user.membership.totalQuota
-        redirect_to stores_path
-        flash[:error] = "Limit Reached!!! cannot upload more files" 
+      if params[:store][:upload] != nil
+        if @quota +  params[:store][:upload].size > current_user.membership.totalQuota
+         redirect_to stores_path
+         flash[:error] = "Limit Reached!!! cannot upload more files" 
+        end
+      else
+      flash[:error] ="Please choose a file"  
       end
     end
 end

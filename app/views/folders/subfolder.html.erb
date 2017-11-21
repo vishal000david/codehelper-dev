@@ -1,5 +1,71 @@
 
-<h1> Inside folder view </h1>
+<h3>FileManager >  <%= @folder_name %> </h3>
 
+
+<table class="table table-hover table-striped">
+      <thead>
+        <tr class="sortable">
+      <th> type </th>
+      <th>FileName</th>
+      <th>Size</th>
+      <th>Uploaded to</th>
+      <th>Permissions</th>
+       
+       <th class="text-center"> <td> Actions </td></th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+
+ <% @shares.each do |share| %>
+      <tr>
+        <td> File </td>
+        <td><%=  File.basename(share.store.upload.path) %>
+         </td>
+        <td><%= share.store.upload.size %> bytes</td>
+        <td><%= share.store.folderType %></td>
+        <td><%= share.permission %></td>
+
+
+        <th>
+      
+       <% if share.permission.include? "X" %>
+         <td>
+          <a href="<%= share.store.upload %>" download> download </a>
+         </td>
+         <td>
+
+        <%= link_to "Share File", open_share_modal_path(store_id: share.store.id), remote: true %>
+        </td>
+      
+        <% end %>
+
+        
+
+        <% if share.permission.include? "R" or share.permission.include? "W"  or share.permission.include? "X"%>
+          <td><%= link_to 'Show', share.store %></td>
+        <% end %>
+        
+        <% if share.permission.include? "W" %>
+           <td><%= link_to 'Edit', edit_store_path(share.store) %></td>
+        <% end %>
+        
+       <% if share.permission.include? "R" and share.permission.include? "W" and share.permission.include? "X" %>
+        <td><%= link_to 'Destroy', share.store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+
+        </th>
+
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
+
+<%= link_to "Add More Files" ,new_store_path(parent: "FileManager",folderId: params[:fold]) %>
 
 
